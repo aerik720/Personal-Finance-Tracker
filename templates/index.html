@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Grafer.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold mb-6">Finansöversikt</h1>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Totala inkomster</h2>
+            <p class="text-2xl text-green-600">25 000 kr</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Totala utgifter</h2>
+            <p class="text-2xl text-red-600">12 500 kr</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Saldo</h2>
+            <p class="text-2xl text-blue-600">12 500 kr</p>
+        </div>
+    </div>
+
+    <!-- Diagram -->
+    <div class="bg-white p-6 rounded-lg shadow mb-10">
+        <h2 class="text-xl font-semibold mb-4">Utgifter per kategori</h2>
+        <canvas id="expenseChart" height="200"></canvas>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Inkomster vs Utgifter</h2>
+        <canvas id="incomeExpenseChart" height="200"></canvas>
+    </div>
+
+    <!-- Grafer.js Script -->
+    <script src="{{ url_for('static', filename='js/grafer.js') }}" defer></script>
+</body>
+</html>

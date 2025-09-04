@@ -1,0 +1,109 @@
+{
+  "account": {
+    "account_number": "1234-5678",
+    "currency": "SEK",
+    "owner": "Anna Svensson",
+    "years": [2024, 2025]
+  },
+  "transactions": [
+    {
+      "date": "2024-01-25",
+      "description": "Lön från Jobb AB",
+      "amount": 28000.00,
+      "type": "credit",
+      "balance": 28000.00
+    },
+    {
+      "date": "2024-03-15",
+      "description": "Spotify Premium",
+      "amount": -109.00,
+      "type": "debit",
+      "balance": 22341.00
+    },
+    {
+      "date": "2024-08-25",
+      "description": "Lön från Jobb AB",
+      "amount": 28100.00,
+      "type": "credit",
+      "balance": 66480.25
+    },
+    {
+      "date": "2024-12-29",
+      "description": "Sparande – överföring till ISK",
+      "amount": -10000.00,
+      "type": "debit",
+      "balance": 58251.25
+    },
+    {
+      "date": "2025-01-25",
+      "description": "Lön från Jobb AB",
+      "amount": 28500.00,
+      "type": "credit",
+      "balance": 86751.25
+    },
+    {
+      "date": "2025-02-02",
+      "description": "ICA Maxi – matinköp",
+      "amount": -1450.00,
+      "type": "debit",
+      "balance": 85301.25
+    },
+    {
+      "date": "2025-03-28",
+      "description": "Hyra",
+      "amount": -9800.00,
+      "type": "debit",
+      "balance": 75501.25
+    },
+    {
+      "date": "2025-04-10",
+      "description": "Bensin – Circle K",
+      "amount": -720.50,
+      "type": "debit",
+      "balance": 74780.75
+    },
+    {
+      "date": "2025-05-25",
+      "description": "Lön från Jobb AB",
+      "amount": 28700.00,
+      "type": "credit",
+      "balance": 103480.75
+    },
+    {
+      "date": "2025-06-18",
+      "description": "Semesterresa – SAS",
+      "amount": -8200.00,
+      "type": "debit",
+      "balance": 95280.75
+    },
+    {
+      "date": "2025-09-03",
+      "description": "Swish till Erik",
+      "amount": -600.00,
+      "type": "debit",
+      "balance": 107180.75
+    },
+    {
+      "date": "2025-10-12",
+      "description": "Netflix",
+      "amount": -139.00,
+      "type": "debit",
+      "balance": 121241.75
+    },
+    {
+      "date": "2025-12-20",
+      "description": "Julklappar – Elgiganten",
+      "amount": -4200.00,
+      "type": "debit",
+      "balance": 134341.75
+    },
+    {
+      "date": "2025-12-29",
+      "description": "Sparande – överföring till ISK",
+      "amount": -12000.00,
+      "type": "debit",
+      "balance": 122341.75
+    }
+  ]
+}
+
