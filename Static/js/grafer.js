@@ -1,39 +1,55 @@
-const expenseData = {
-            labels: ['Hyra', 'Mat', 'Transport', 'Nöjen', 'Övrigt'],
-            datasets: [{
-                label: 'Utgifter',
-                data: [9500, 1240, 720, 600, 400],
-                backgroundColor: ['#f87171','#fbbf24','#60a5fa','#34d399','#a78bfa']
-            }]
-        };
+fetch('/api/transactions')
+  .then(response => response.json())
+  .then(transaktioner => {
 
-        const expenseChart = new Chart(
-            document.getElementById('expenseChart'),
-            {
-                type: 'doughnut',
-                data: expenseData
-            }
-        );
+    let inkomster = 0;
+    let utgifter = 0;
 
-        const incomeExpenseData = {
-            labels: ['Inkomster', 'Utgifter'],
-            datasets: [{
-                label: 'Belopp',
-                data: [25000, 12500],
-                backgroundColor: ['#22c55e', '#ef4444']
-            }]
-        };
+    transaktioner.forEach(tx => {
+      if (tx.type === "credit") {
+        inkomster += tx.amount;
+      } else {
+        utgifter += Math.abs(tx.amount);
+      }
+    });
 
-        const incomeExpenseChart = new Chart(
-            document.getElementById('incomeExpenseChart'),
-            {
-                type: 'bar',
-                data: incomeExpenseData,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    }
-                }
-            }
-        );
+    document.getElementById('inkomst').textContent = `${Math.round(inkomster)} kr`;
+    document.getElementById('utgift').textContent = `${Math.round(utgifter)} kr`;
+    document.getElementById('saldo').textContent = `${Math.round(inkomster - utgifter)} kr`;
+
+    // Rita stapeldiagram
+    const ctx = document.getElementById('incomeExpenseChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Inkomster', 'Utgifter'],
+        datasets: [{
+          label: 'Belopp (kr)',
+          data: [inkomster, utgifter]
+        }]
+      }
+    });
+
+    // Kategorisera utgifter
+    let kategorier = {};
+    transaktioner.forEach(tx => {
+      if (tx.type === "debit") {
+        let kategori = tx.description.split(" ")[0];
+        kategorier[kategori] = (kategorier[kategori] || 0) + Math.abs(tx.amount);
+      }
+    });
+
+    // Rita cirkeldiagram
+    const ctx2 = document.getElementById('expenseChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: Object.keys(kategorier),
+        datasets: [{
+          label: 'Största Utgifterna',
+          data: Object.values(kategorier)
+        }]
+      }
+    });
+
+  });

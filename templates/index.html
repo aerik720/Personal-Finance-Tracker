@@ -17,21 +17,21 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div class="bg-white p-6 rounded-lg shadow">
             <h2 class="text-xl font-semibold mb-2">Totala inkomster</h2>
-            <p class="text-2xl text-green-600">25 000 kr</p>
+            <p id="inkomst" class="text-2xl text-green-600">25 000 kr</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow">
             <h2 class="text-xl font-semibold mb-2">Totala utgifter</h2>
-            <p class="text-2xl text-red-600">12 500 kr</p>
+            <p id="utgift" class="text-2xl text-red-600">12 500 kr</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow">
             <h2 class="text-xl font-semibold mb-2">Saldo</h2>
-            <p class="text-2xl text-blue-600">12 500 kr</p>
+            <p id="saldo" class="text-2xl text-blue-600">12 500 kr</p>
         </div>
     </div>
 
     <!-- Diagram -->
     <div class="bg-white p-6 rounded-lg shadow mb-10">
-        <h2 class="text-xl font-semibold mb-4">Utgifter per kategori</h2>
+        <h2 class="text-xl font-semibold mb-4">Utgifter</h2>
         <canvas id="expenseChart" height="200"></canvas>
     </div>
 
