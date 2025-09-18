@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Finance Tracker</title>
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Grafer.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
+
 <body class="bg-gray-100 p-6">
     <h1 class="text-3xl font-bold mb-6">Finansöversikt</h1>
+    <h2 class="text-xl font-semibold mb-4">Importera Excel-fil</h2>
+    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/api/import">
+        <input type="file" id="excelFil" name="file" accept=".xlsx" class="mb-2 border rounded">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Ladda upp</button>
+    </form>
+    <p id="status" class="mb-2 text-green-600"></p>
+
 
     <!-- Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -43,4 +50,5 @@
     <!-- Grafer.js Script -->
     <script src="{{ url_for('static', filename='js/grafer.js') }}" defer></script>
 </body>
+
 </html>

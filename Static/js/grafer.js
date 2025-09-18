@@ -14,12 +14,35 @@ fetch('/api/transactions')
     });
 
     // Gör en knapp för att hämta excel fil
-    const importBtn = document.createElement('button');
-    importBtn.textContent = 'Importera Excel-fil';
-    importBtn.addEventListener('click', () => {
-      window.location.href = '/api/import';
+    const form = document.getElementById('uploadForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('excelFil');
+      if (!fileInput.files.length) {
+        alert("Välj en fil först!");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/api/import', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        document.getElementById('status').textContent = result.message;
+      } catch (err) {
+        console.error(err);
+        status.textContent = "Något gick fel!";
+      }
     });
-    document.body.appendChild(importBtn);
+
 
     document.getElementById('inkomst').textContent = `${Math.round(inkomster)} kr`;
     document.getElementById('utgift').textContent = `${Math.round(utgifter)} kr`;

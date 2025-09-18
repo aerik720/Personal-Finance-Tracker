@@ -1,7 +1,6 @@
-from datetime import datetime
-import Konto as K
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finances.db'
@@ -16,6 +15,32 @@ class Transaktion(db.Model):
 
     def __repr__(self):
         return f'<Transaktion {self.description} {self.amount}>'
+
+@app.route('/api/import', methods=['POST'])
+def import_data():
+    if "file" not in request.files:
+        return {"error": "No file part"}, 400
+    file = request.files["file"]
+
+    Transaktion.query.delete()
+    db.session.commit()
+
+    df = pd.read_excel(file, skiprows=8)
+
+    for _, row in df.iterrows():
+        date_obj = pd.to_datetime(row['Transaktionsdatum']).date()
+        typec = 'credit' if float(row['Belopp']) > 0 else 'debit'
+        tx = Transaktion(
+            date=date_obj,
+            description=str(row['Text']),
+            amount=float(row['Belopp']),
+            type=typec
+        )
+        db.session.add(tx)
+    db.session.commit()
+    return {"message": "Data imported successfully"}, 200
+
+
 
 @app.route('/')
 def index():
@@ -34,7 +59,6 @@ def get_transactions():
         } for tx in transactions
     ]
     return jsonify(transaktioner)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
