@@ -13,6 +13,14 @@ fetch('/api/transactions')
       }
     });
 
+    // Gör en knapp för att hämta excel fil
+    const importBtn = document.createElement('button');
+    importBtn.textContent = 'Importera Excel-fil';
+    importBtn.addEventListener('click', () => {
+      window.location.href = '/api/import';
+    });
+    document.body.appendChild(importBtn);
+
     document.getElementById('inkomst').textContent = `${Math.round(inkomster)} kr`;
     document.getElementById('utgift').textContent = `${Math.round(utgifter)} kr`;
     document.getElementById('saldo').textContent = `${Math.round(inkomster - utgifter)} kr`;
@@ -25,9 +33,10 @@ fetch('/api/transactions')
         labels: ['Inkomster', 'Utgifter'],
         datasets: [{
           label: 'Belopp (kr)',
-          data: [inkomster, utgifter]
+          data: [inkomster, utgifter],
+          backgroundColor: ['#4CAF50', '#F44336']
         }]
-      }
+      },
     });
 
     // Kategorisera utgifter

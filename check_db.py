@@ -1,5 +1,5 @@
 from Finances import db, app
-from Finances import Transaktion  # om du lagt modellen i models.py, annars importera rätt
+from Finances import Transaktion
 
 with app.app_context():
     rows = Transaktion.query.limit(20).all()

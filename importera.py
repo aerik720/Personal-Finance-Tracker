@@ -2,7 +2,6 @@ import pandas as pd
 from datetime import datetime
 from Finances import db, app, Transaktion
 
-# Läs Excel och hoppa över raderna innan rubrikerna
 df = pd.read_excel("kontoutdrag.xlsx", skiprows=8)  
 
 
@@ -18,5 +17,4 @@ with app.app_context():
         )
         db.session.add(tx)
     db.session.commit()
-    print("Excel-data har lagts in i databasen!")
 
